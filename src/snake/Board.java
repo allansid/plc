@@ -20,7 +20,7 @@ public class Board extends JPanel implements ActionListener {
 
     private final int B_WIDTH = 900;
     private final int B_HEIGHT = 700;
-    private final int DOT_SIZE = 40;
+    private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
     private int DELAY = 120;
@@ -83,6 +83,8 @@ public class Board extends JPanel implements ActionListener {
     private Image papagaio_img;
     private Image pinguin_img;
     private Image porco_img;
+
+    private Image prey_img;
 
     public Board() {
 
@@ -175,8 +177,7 @@ public class Board extends JPanel implements ActionListener {
     private void doDrawing(Graphics g) {
 
         if (inGame) {
-
-            g.drawImage(elefante_img, apple_x, apple_y, this);
+            g.drawImage(prey_img, apple_x, apple_y, this);
 
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
@@ -190,8 +191,15 @@ public class Board extends JPanel implements ActionListener {
                         g.drawImage(head_right_img, x[z], y[z], this);
                     }
                 } else {
-                    g.drawImage(tail_right_img, x[z], y[z], this);
-
+                    if (downDirection) {
+                        g.drawImage(tail_down_img, x[z], y[z], this);
+                    } else if (upDirection) {
+                        g.drawImage(tail_up_img, x[z], y[z], this);
+                    } else if (leftDirection) {
+                        g.drawImage(tail_left_img, x[z], y[z], this);
+                    } else if (rightDirection) {
+                        g.drawImage(tail_right_img, x[z], y[z], this);
+                    }
                 }
 //                System.out.println("z: "+z);
 //                System.out.println("x: " + x[z] + "  y: "+y[z]);
@@ -311,12 +319,35 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void locateApple() {
+        int r;
 
-        int r = (int) (Math.random() * RAND_POS);
+        r = (int) (Math.random() * RAND_POS);
         apple_x = ((r * DOT_SIZE));
 
         r = (int) (Math.random() * RAND_POS);
         apple_y = ((r * DOT_SIZE));
+
+        int prey = (int) (Math.random() * 9);
+
+        if (prey == 0) {
+          prey_img = elefante_img;
+        } else if (prey == 1) {
+            prey_img = cavalo_img;
+        } else if (prey == 2) {
+            prey_img = coelho_img;
+        } else if (prey == 3) {
+            prey_img = girafa_img;
+        } else if (prey == 4) {
+            prey_img = macaco_img;
+        } else if (prey == 5) {
+            prey_img = panda_img;
+        } else if (prey == 6) {
+            prey_img = papagaio_img;
+        } else if (prey == 7) {
+            prey_img = pinguin_img;
+        } else if (prey == 8) {
+            prey_img = porco_img;
+        }
     }
 
     @Override
