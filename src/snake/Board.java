@@ -20,7 +20,7 @@ public class Board extends JPanel implements ActionListener {
 
     private final int B_WIDTH = 900;
     private final int B_HEIGHT = 700;
-    private final int DOT_SIZE = 10;
+    private final int DOT_SIZE = 40;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
     private int DELAY = 120;
@@ -180,7 +180,15 @@ public class Board extends JPanel implements ActionListener {
 
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
-                    g.drawImage(head_down_img, x[z], y[z], this);
+                    if (downDirection) {
+                        g.drawImage(head_down_img, x[z], y[z], this);
+                    } else if (upDirection) {
+                        g.drawImage(head_up_img, x[z], y[z], this);
+                    } else if (leftDirection) {
+                        g.drawImage(head_left_img, x[z], y[z], this);
+                    } else if (rightDirection) {
+                        g.drawImage(head_right_img, x[z], y[z], this);
+                    }
                 } else {
                     g.drawImage(tail_right_img, x[z], y[z], this);
 
@@ -364,10 +372,12 @@ public class Board extends JPanel implements ActionListener {
 
             if (key == KeyEvent.VK_M){
                 DELAY = DELAY + 10;
+                System.out.println(DELAY);
             }
 
             if (key == KeyEvent.VK_N){
                 DELAY = DELAY - 10;
+                System.out.println(DELAY);
             }
 
         }
