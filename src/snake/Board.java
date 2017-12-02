@@ -18,8 +18,8 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
+    private final int B_WIDTH = 900;
+    private final int B_HEIGHT = 700;
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
@@ -113,10 +113,10 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
 
         String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
+        Font small = new Font("Helvetica", Font.ITALIC, 20);
         FontMetrics metr = getFontMetrics(small);
 
-        g.setColor(Color.white);
+        g.setColor(Color.red);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
     }
