@@ -56,13 +56,13 @@ public class Board extends JPanel implements ActionListener {
 
     private void loadImages() {
 
-        ImageIcon iid = new ImageIcon("/home/allan/plc/projeto/plc/src/assets/ball.png");
+        ImageIcon iid = new ImageIcon("ball.png");
         ball = iid.getImage();
 
-        ImageIcon iia = new ImageIcon("/home/allan/plc/projeto/plc/src/assets/parrot.png");
+        ImageIcon iia = new ImageIcon("parrot.png");
         apple = iia.getImage();
 
-        ImageIcon iih = new ImageIcon("/home/allan/plc/projeto/plc/src/assets/icon_snake.png");
+        ImageIcon iih = new ImageIcon("icon_snake.png");
         head = iih.getImage();
     }
 
@@ -113,7 +113,7 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
 
         String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.ITALIC, 20);
+        Font small = new Font("f", Font.ITALIC, 20);
         FontMetrics metr = getFontMetrics(small);
 
         g.setColor(Color.red);
