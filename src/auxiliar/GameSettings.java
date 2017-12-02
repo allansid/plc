@@ -1,6 +1,5 @@
 package auxiliar;
 import java.awt.*;
-import java.awt.image.*;
 import java.util.*;
 import java.awt.event.*;
 
@@ -45,6 +44,7 @@ public class GameSettings extends ApplicationHandler{
         createKey("DOWN",KeyEvent.VK_DOWN);
         createKey("RIGHT",KeyEvent.VK_RIGHT);
         createKey("LEFT",KeyEvent.VK_LEFT);
+        createKey("ESC", KeyEvent.VK_ESCAPE);
     }
 
     public void draw(Graphics g){

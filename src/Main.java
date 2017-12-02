@@ -1,5 +1,6 @@
 import auxiliar.GameSettings;
 import auxiliar.InputHandler;
+import auxiliar.WindowBuilder;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -19,8 +20,6 @@ public class Main extends Canvas implements Runnable{
         fps = 1000/game.getFps();//
         setPreferredSize(new Dimension(game.getLargura()-10,game.getAltura()-10));
         this.addKeyListener(input);
-        this.addMouseListener(input);
-        this.addMouseMotionListener(input);
     }
 
     public void start(){
@@ -80,14 +79,8 @@ public class Main extends Canvas implements Runnable{
     public static void main(String []args){
         JFrame janela = new JFrame();
         Main jogo = new Main();
-
         janela.add(jogo);
-        janela.pack();
-        janela.setVisible(true);
-        janela.setResizable(false);
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setLocationRelativeTo(null);
-
+        new WindowBuilder(janela);
         jogo.start();
     }
 }
