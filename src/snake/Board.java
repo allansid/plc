@@ -72,10 +72,10 @@ public class Board extends JPanel implements ActionListener {
     private void initGame() {
 
         dots = 3;
-
+        int fator = 5;
         for (int z = 0; z < dots; z++) {
-            x[z] = 50 - z * 10;
-            y[z] = 50;
+            x[z] = 50*fator - (z * 10)*fator;
+            y[z] = 50*fator;
         }
 
         locateApple();
@@ -103,7 +103,10 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(head, x[z], y[z], this);
                 } else {
                     g.drawImage(tail, x[z], y[z], this);
+
                 }
+//                System.out.println("z: "+z);
+//                System.out.println("x: " + x[z] + "  y: "+y[z]);
             }
 
             Toolkit.getDefaultToolkit().sync();
@@ -141,7 +144,26 @@ public class Board extends JPanel implements ActionListener {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
-            dots++;
+//            if (){
+//                apple.
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else {
+                dots++;
+//            }
+
             locateApple();
         }
     }
