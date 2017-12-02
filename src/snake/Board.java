@@ -40,7 +40,7 @@ public class Board extends JPanel implements ActionListener {
     private boolean inGame = true;
 
     private Timer timer;
-    private Image ball;
+    private Image tail;
     private Image apple;
     private Image head;
 
@@ -58,7 +58,7 @@ public class Board extends JPanel implements ActionListener {
     private void loadImages() {
 
         ImageIcon iid = new ImageIcon("assets/parrot.png");
-        ball = iid.getImage();
+        tail = iid.getImage();
 
         ImageIcon iia = new ImageIcon("assets/parrot.png");
         apple = iia.getImage();
@@ -99,7 +99,7 @@ public class Board extends JPanel implements ActionListener {
                 if (z == 0) {
                     g.drawImage(head, x[z], y[z], this);
                 } else {
-                    g.drawImage(ball, x[z], y[z], this);
+                    g.drawImage(tail, x[z], y[z], this);
                 }
             }
 
