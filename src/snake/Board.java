@@ -24,7 +24,7 @@ public class Board extends JPanel implements ActionListener {
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
-    private final int DELAY = 120;
+    private int DELAY = 120;
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
@@ -37,7 +37,9 @@ public class Board extends JPanel implements ActionListener {
     private boolean rightDirection = true;
     private boolean upDirection = false;
     private boolean downDirection = false;
+    private boolean esc = false;
     private boolean inGame = true;
+    private boolean pause = false;
 
     private Timer timer;
     private Image tail;
@@ -57,13 +59,13 @@ public class Board extends JPanel implements ActionListener {
 
     private void loadImages() {
 
-        ImageIcon iid = new ImageIcon("assets/parrot.png");
+        ImageIcon iid = new ImageIcon("assets/icon_snake.png");
         tail = iid.getImage();
 
         ImageIcon iia = new ImageIcon("assets/parrot.png");
         apple = iia.getImage();
 
-        ImageIcon iih = new ImageIcon("assets/parrot.png");
+        ImageIcon iih = new ImageIcon("assets/icon_snake.png");
         head = iih.getImage();
     }
 
@@ -79,6 +81,7 @@ public class Board extends JPanel implements ActionListener {
         locateApple();
 
         timer = new Timer(DELAY, this);
+
         timer.start();
     }
 
@@ -105,10 +108,22 @@ public class Board extends JPanel implements ActionListener {
 
             Toolkit.getDefaultToolkit().sync();
 
+        } else if (esc) {
+            gameClose();
         } else {
 
             gameOver(g);
         }
+
+        if (pause) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+    }
+
+    private void gameClose() {
+
     }
 
     private void gameOver(Graphics g) {
@@ -236,6 +251,23 @@ public class Board extends JPanel implements ActionListener {
                 rightDirection = false;
                 leftDirection = false;
             }
+
+            if (key == KeyEvent.VK_ESCAPE) {
+                esc = true;
+            }
+
+            if (key == KeyEvent.VK_P) {
+                pause = !pause;
+            }
+
+            if (key == KeyEvent.VK_M){
+                DELAY = DELAY + 10;
+            }
+
+            if (key == KeyEvent.VK_N){
+                DELAY = DELAY - 10;
+            }
+
         }
     }
 }
