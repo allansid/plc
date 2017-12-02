@@ -1,19 +1,22 @@
 import snake.Board;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Created by allan on 02/12/2017.
+ */
+public class Main extends JFrame {
 
 
-public class Snake extends JFrame {
-
-    public Snake() {
+    public Main() {
 
         add(new Board());
 
         setResizable(false);
         pack();
 
-        setTitle("Snake");
+        setTitle("Cobra Debochada");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -23,7 +26,7 @@ public class Snake extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame ex = new Snake();
+                JFrame ex = new Main();
                 ex.setVisible(true);
             }
         });
