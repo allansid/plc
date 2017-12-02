@@ -22,8 +22,8 @@ public class GameSettings extends ApplicationHandler{
 
     public void setup(){
         setFps(30);
-        setAltura(500);
-        setLargura(500);
+        setAltura(650);
+        setLargura(850);
         for (int i = 0;i < max_tamanho; i++ ) {
             for (int j = 0;j < 2; j++ ) {
                 cobra[i][j] = -1;
