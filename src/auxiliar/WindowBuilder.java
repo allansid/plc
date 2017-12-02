@@ -1,6 +1,8 @@
 package auxiliar;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by joaoluiz on 12/2/17.

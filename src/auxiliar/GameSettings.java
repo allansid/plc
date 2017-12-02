@@ -11,6 +11,8 @@ public class GameSettings extends ApplicationHandler{
     int max_tamanho = 50*50;
     int[][] cobra = new int[max_tamanho][2];
     int tamanho_atual = 4;
+    boolean backgroundcolor = true;
+    boolean escape_pressed = false;
     //---
 
     //food
@@ -20,8 +22,8 @@ public class GameSettings extends ApplicationHandler{
 
     public void setup(){
         setFps(30);
-        setAltura(500);
-        setLargura(500);
+        setAltura(650);
+        setLargura(850);
         for (int i = 0;i < max_tamanho; i++ ) {
             for (int j = 0;j < 2; j++ ) {
                 cobra[i][j] = -1;
@@ -45,19 +47,24 @@ public class GameSettings extends ApplicationHandler{
         createKey("RIGHT",KeyEvent.VK_RIGHT);
         createKey("LEFT",KeyEvent.VK_LEFT);
         createKey("ESC", KeyEvent.VK_ESCAPE);
+        createKey("B",KeyEvent.VK_B);
     }
 
     public void draw(Graphics g){
-        g.setColor(Color.BLACK);
+        if (backgroundcolor) {
+            g.setColor(Color.BLACK);
+        } else {
+            g.setColor(Color.WHITE);
+        }
         g.fillRect(0,0,getLargura(),getAltura());
 
-        g.setColor(Color.WHITE);
+        g.setColor(Color.RED);
         for (int i = 0;i < max_tamanho;i++) {
             if(cobra[i][0] != -1)
                 g.fillOval(cobra[i][0],cobra[i][1],tamanho,tamanho);
         }
 
-        g.setColor(Color.CYAN);
+        g.setColor(Color.GREEN);
         g.fillOval(x_f,y_f,tamanho,tamanho);
     }
 
@@ -117,18 +124,22 @@ public class GameSettings extends ApplicationHandler{
     }
 
     public void checkInput(){
-        if(isKeyPressed("UP") && y_vel == 0){
+        if (isKeyPressed("UP") && y_vel == 0) {
             x_vel = 0;
             y_vel = -tamanho;
-        }else if(isKeyPressed("DOWN") && y_vel == 0){
+        } else if (isKeyPressed("DOWN") && y_vel == 0) {
             x_vel = 0;
             y_vel = tamanho;
-        }else if(isKeyPressed("RIGHT") && x_vel == 0){
+        } else if (isKeyPressed("RIGHT") && x_vel == 0) {
             x_vel = tamanho;
             y_vel = 0;
-        }else if(isKeyPressed("LEFT") && x_vel == 0){
+        } else if (isKeyPressed("LEFT") && x_vel == 0) {
             x_vel = -tamanho;
             y_vel = 0;
+        } else if (isKeyPressed("B")) {
+            backgroundcolor = !backgroundcolor;
+        } else if (isKeyPressed("ESC")) {
+            escape_pressed = !escape_pressed;
         }
     }
 }

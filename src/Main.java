@@ -1,8 +1,10 @@
+import auxiliar.EscapableJframe;
 import auxiliar.GameSettings;
 import auxiliar.InputHandler;
 import auxiliar.WindowBuilder;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.awt.image.*;
 import javax.swing.*;
 
