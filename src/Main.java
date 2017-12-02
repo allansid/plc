@@ -6,6 +6,7 @@ import java.awt.*;
 /**
  * Created by allan on 02/12/2017.
  */
+
 public class Main extends JFrame {
 
 
@@ -16,7 +17,7 @@ public class Main extends JFrame {
         setResizable(false);
         pack();
 
-        setTitle("Cobra Debochada");
+        setTitle("PLC - Snake That Eat Parrots");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -23,7 +24,7 @@ public class Board extends JPanel implements ActionListener {
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
-    private final int DELAY = 140;
+    private final int DELAY = 120;
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
@@ -56,13 +57,13 @@ public class Board extends JPanel implements ActionListener {
 
     private void loadImages() {
 
-        ImageIcon iid = new ImageIcon("/home/allan/plc/projeto/plc/src/assets/ball.png");
+        ImageIcon iid = new ImageIcon("assets/parrot.png");
         ball = iid.getImage();
 
-        ImageIcon iia = new ImageIcon("/home/allan/plc/projeto/plc/src/assets/parrot.png");
+        ImageIcon iia = new ImageIcon("assets/parrot.png");
         apple = iia.getImage();
 
-        ImageIcon iih = new ImageIcon("/home/allan/plc/projeto/plc/src/assets/icon_snake.png");
+        ImageIcon iih = new ImageIcon("assets/parrot.png");
         head = iih.getImage();
     }
 
@@ -197,7 +198,6 @@ public class Board extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (inGame) {
-
             checkApple();
             checkCollision();
             move();
