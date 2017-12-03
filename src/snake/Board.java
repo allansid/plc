@@ -11,11 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener {
 
@@ -33,6 +34,7 @@ public class Board extends JPanel implements ActionListener {
     private int apple_x;
     private int apple_y;
 
+    private boolean acabar = false;
     private boolean leftDirection = false;
     private boolean rightDirection = true;
     private boolean upDirection = false;
@@ -47,9 +49,8 @@ public class Board extends JPanel implements ActionListener {
     public Board() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.black);
+        setBackground(Color.green);
         setFocusable(true);
-
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
         initGame();
@@ -85,12 +86,14 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         doDrawing(g);
     }
 
     private void doDrawing(Graphics g) {
 
+        if(acabar){
+            finalizado(g);
+        }
         if (inGame) {
 
             g.drawImage(apple, apple_x, apple_y, this);
@@ -116,11 +119,22 @@ public class Board extends JPanel implements ActionListener {
         String msg = "Game Over";
         Font small = new Font("f", Font.ITALIC, 20);
         FontMetrics metr = getFontMetrics(small);
+        g.setColor(Color.red);
+        g.setFont(small);
+        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+    }
+
+    private void finalizado(Graphics g) {
+
+        String msg = "Jogo Finalizado";
+        Font small = new Font("f", Font.ITALIC, 20);
+        FontMetrics metr = getFontMetrics(small);
 
         g.setColor(Color.red);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
     }
+
 
     private void checkApple() {
 
@@ -202,8 +216,8 @@ public class Board extends JPanel implements ActionListener {
             checkCollision();
             move();
         }
-
         repaint();
+
     }
 
     private class TAdapter extends KeyAdapter {
@@ -235,6 +249,9 @@ public class Board extends JPanel implements ActionListener {
                 downDirection = true;
                 rightDirection = false;
                 leftDirection = false;
+            }
+            if((key == KeyEvent.VK_ESCAPE)){
+                acabar = true;
             }
         }
     }
