@@ -235,21 +235,18 @@ public class Board extends JPanel implements ActionListener, Runnable {
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
             if (prey_img == cavalo_img || prey_img == girafa_img){
-                dots = dots + 6;
                 score = score + 6;
             } else if (prey_img == elefante_img) {
-                dots = dots + 10;
                 score = score + 10;
             } else if (prey_img == macaco_img || prey_img == panda_img) {
-                dots = dots + 3;
                 score = score + 3;
             } else if (prey_img == pinguin_img) {
-                dots = dots + 2;
                 score = score + 2;
             } else {
-                dots++;
                 score = score++;
             }
+            dots++;
+
             locateApple();
         }
     }
