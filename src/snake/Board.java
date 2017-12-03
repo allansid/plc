@@ -53,7 +53,6 @@ public class Board extends JPanel implements ActionListener {
     private int apple_x;
     private int apple_y;
 
-    private boolean acabar = false;
     private boolean leftDirection = false;
     private boolean rightDirection = true;
     private boolean upDirection = false;
@@ -173,8 +172,8 @@ public class Board extends JPanel implements ActionListener {
 
     private void doDrawing(Graphics g) {
 
-        if(acabar){
-            finalizado(g);
+        if(esc){
+            System.exit(0);
         }
         if (inGame) {
 
@@ -224,17 +223,6 @@ public class Board extends JPanel implements ActionListener {
         String msg = "Game Over";
         Font small = new Font("f", Font.ITALIC, 20);
         FontMetrics metr = getFontMetrics(small);
-        g.setColor(Color.red);
-        g.setFont(small);
-        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
-    }
-
-    private void finalizado(Graphics g) {
-
-        String msg = "Jogo Finalizado";
-        Font small = new Font("f", Font.ITALIC, 20);
-        FontMetrics metr = getFontMetrics(small);
-
         g.setColor(Color.red);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
