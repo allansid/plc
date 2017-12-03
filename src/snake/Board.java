@@ -14,12 +14,12 @@ import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener, Runnable {
 
-    private final int B_WIDTH = 900;
-    private final int B_HEIGHT = 700;
-    private final int DOT_SIZE = 10;
+    private final int DOT_SIZE = 35;
+    private final int B_WIDTH = DOT_SIZE*35;
+    private final int B_HEIGHT = DOT_SIZE*20;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
-    private int DELAY = 120;
+    private int DELAY = 140;
 
 //    SNAKE ASSETS PATH
     private final String HEAD_UP = "assets/snake/up_head.png";
@@ -154,10 +154,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private void initGame() {
 
         dots = 3;
-        int fator = 5;
+
         for (int z = 0; z < dots; z++) {
-            x[z] = 50*fator - (z * 10)*fator;
-            y[z] = 50*fator;
+            x[z] = DOT_SIZE - (z * 10);
+            y[z] = DOT_SIZE;
         }
 
         locateApple();
@@ -277,6 +277,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void checkCollision() {
 
+        System.out.println(x[0] + " " + y[0]);
         for (int z = dots; z > 0; z--) {
 
             if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
@@ -297,6 +298,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
         }
 
         if (x[0] < 0) {
+            System.out.println("Entrei" + x[0]);
             inGame = false;
         }
 
