@@ -222,8 +222,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void gameOver(Graphics g) {
 
-        String msg = "Game Over";
-        Font small = new Font("f", Font.ITALIC, 20);
+        String msg = "Game Over" + '\n'+ "Score: " + score;
+        Font small = new Font("f", Font.BOLD, 20);
         FontMetrics metr = getFontMetrics(small);
         g.setColor(Color.red);
         g.setFont(small);
@@ -231,26 +231,22 @@ public class Board extends JPanel implements ActionListener, Runnable {
     }
 
 
-    private void checkApple() {
+    private synchronized void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
             if (prey_img == cavalo_img || prey_img == girafa_img){
-                dots = dots + 6;
                 score = score + 6;
             } else if (prey_img == elefante_img) {
-                dots = dots + 10;
                 score = score + 10;
             } else if (prey_img == macaco_img || prey_img == panda_img) {
-                dots = dots + 3;
                 score = score + 3;
             } else if (prey_img == pinguin_img) {
-                dots = dots + 2;
                 score = score + 2;
             } else {
-                dots++;
-                score = score++;
+                score++;
             }
+            dots++;
             locateApple();
         }
     }
