@@ -12,7 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 
-public class Board extends JPanel implements ActionListener {
+public class Board extends JPanel implements ActionListener, Runnable {
 
     private final int DOT_SIZE = 35;
     private final int B_WIDTH = DOT_SIZE*35;
@@ -56,8 +56,9 @@ public class Board extends JPanel implements ActionListener {
     private boolean esc = false;
     private boolean inGame = true;
     private boolean pause = false;
-
+    private int score = 0;
     private Timer timer;
+    private JLabel scoreLabel = new JLabel("Score: "+score);
 //    Snake Images
     private Image tail_up_img;
     private Image tail_down_img;
@@ -78,16 +79,18 @@ public class Board extends JPanel implements ActionListener {
     private Image papagaio_img;
     private Image pinguin_img;
     private Image porco_img;
-
     private Image prey_img;
 
     public Board() {
 
         addKeyListener(new TAdapter());
+        add(scoreLabel);
         setBackground(Color.DARK_GRAY);
         setFocusable(true);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
+        Thread a = new Thread(this);
+        a.start();
         initGame();
     }
 
@@ -205,6 +208,8 @@ public class Board extends JPanel implements ActionListener {
 
             Toolkit.getDefaultToolkit().sync();
 
+        } else {
+            gameOver(g);
         }
 
         if (pause) {
@@ -231,16 +236,20 @@ public class Board extends JPanel implements ActionListener {
 
             if (prey_img == cavalo_img || prey_img == girafa_img){
                 dots = dots + 6;
+                score = score + 6;
             } else if (prey_img == elefante_img) {
                 dots = dots + 10;
+                score = score + 10;
             } else if (prey_img == macaco_img || prey_img == panda_img) {
                 dots = dots + 3;
+                score = score + 3;
             } else if (prey_img == pinguin_img) {
                 dots = dots + 2;
+                score = score + 2;
             } else {
                 dots++;
+                score = score++;
             }
-
             locateApple();
         }
     }
@@ -343,6 +352,13 @@ public class Board extends JPanel implements ActionListener {
         }
         repaint();
 
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            scoreLabel.setText("Score: "+score);
+        }
     }
 
     private class TAdapter extends KeyAdapter {
