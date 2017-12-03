@@ -1,8 +1,4 @@
 package snake;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,12 +14,12 @@ import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 900;
-    private final int B_HEIGHT = 700;
+    private final int B_WIDTH = 1200;
+    private final int B_HEIGHT = 600;
     private final int DOT_SIZE = 40;
-    private final int ALL_DOTS = 900;
-    private final int RAND_POS = 29;
-    private int DELAY = 120;
+    private final int ALL_DOTS = 450;
+    private final int RAND_POS = 20;
+    private int DELAY = 140;
 
 //    SNAKE ASSETS PATH
     private final String HEAD_UP = "assets/snake/up_head.png";
@@ -73,7 +69,6 @@ public class Board extends JPanel implements ActionListener {
     private Image head_right_img;
 
 //     Animals Images
-
     private Image cavalo_img;
     private Image coelho_img;
     private Image elefante_img;
@@ -87,7 +82,7 @@ public class Board extends JPanel implements ActionListener {
     public Board() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.green);
+        setBackground(Color.ORANGE);
         setFocusable(true);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
@@ -146,6 +141,9 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon pinguin = new ImageIcon(PINGUIN);
         pinguin_img = pinguin.getImage();
+
+        ImageIcon porco = new ImageIcon(PORCO);
+        porco_img = porco.getImage();
     }
 
     private void initGame() {
@@ -160,7 +158,6 @@ public class Board extends JPanel implements ActionListener {
         locateApple();
 
         timer = new Timer(DELAY, this);
-
         timer.start();
     }
 
