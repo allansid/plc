@@ -205,6 +205,8 @@ public class Board extends JPanel implements ActionListener {
 
             Toolkit.getDefaultToolkit().sync();
 
+        } else {
+            gameOver(g);
         }
 
         if (pause) {
