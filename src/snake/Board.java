@@ -23,7 +23,7 @@ public class Board extends JPanel implements ActionListener {
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
-    private final int DELAY = 120;
+    private int DELAY = 120;
 
 //    SNAKE ASSETS PATH
     private final String HEAD_UP = "assets/snake/up_head.png";
@@ -57,7 +57,9 @@ public class Board extends JPanel implements ActionListener {
     private boolean rightDirection = true;
     private boolean upDirection = false;
     private boolean downDirection = false;
+    private boolean esc = false;
     private boolean inGame = true;
+    private boolean pause = false;
 
     private Timer timer;
 //    Snake Images
@@ -81,9 +83,6 @@ public class Board extends JPanel implements ActionListener {
     private Image papagaio_img;
     private Image pinguin_img;
     private Image porco_img;
-
-
-    private Image apple;
 
     public Board() {
 
@@ -148,24 +147,21 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon pinguin = new ImageIcon(PINGUIN);
         pinguin_img = pinguin.getImage();
-
-        ImageIcon porco = new ImageIcon(PORCO);
-        porco_img = porco.getImage();
-
     }
 
     private void initGame() {
 
         dots = 3;
-
+        int fator = 5;
         for (int z = 0; z < dots; z++) {
-            x[z] = 50 - z * 10;
-            y[z] = 50;
+            x[z] = 50*fator - (z * 10)*fator;
+            y[z] = 50*fator;
         }
 
         locateApple();
 
         timer = new Timer(DELAY, this);
+
         timer.start();
     }
 
@@ -187,15 +183,30 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(head_down_img, x[z], y[z], this);
                 } else {
                     g.drawImage(tail_right_img, x[z], y[z], this);
+
                 }
+//                System.out.println("z: "+z);
+//                System.out.println("x: " + x[z] + "  y: "+y[z]);
             }
 
             Toolkit.getDefaultToolkit().sync();
 
+        } else if (esc) {
+            gameClose();
         } else {
 
             gameOver(g);
         }
+
+        if (pause) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+    }
+
+    private void gameClose() {
+
     }
 
     private void gameOver(Graphics g) {
@@ -213,7 +224,26 @@ public class Board extends JPanel implements ActionListener {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
-            dots++;
+//            if (){
+//                apple.
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else {
+                dots++;
+//            }
+
             locateApple();
         }
     }
@@ -323,6 +353,23 @@ public class Board extends JPanel implements ActionListener {
                 rightDirection = false;
                 leftDirection = false;
             }
+
+            if (key == KeyEvent.VK_ESCAPE) {
+                esc = true;
+            }
+
+            if (key == KeyEvent.VK_P) {
+                pause = !pause;
+            }
+
+            if (key == KeyEvent.VK_M){
+                DELAY = DELAY + 10;
+            }
+
+            if (key == KeyEvent.VK_N){
+                DELAY = DELAY - 10;
+            }
+
         }
     }
 }
