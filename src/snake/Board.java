@@ -84,6 +84,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     public Board() {
 
+        scoreLabel.setForeground(Color.white);
+        scoreLabel.setSize(new Dimension(60,30));
         addKeyListener(new TAdapter());
         add(scoreLabel);
         setBackground(Color.DARK_GRAY);
@@ -222,8 +224,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void gameOver(Graphics g) {
 
-        String msg = "Game Over" + '\n'+ "Score: " + score;
-        Font small = new Font("f", Font.BOLD, 20);
+        String msg = "Game Over" + '\n'+ " Score: " + score;
+        Font small = new Font("f", Font.BOLD, 40);
         FontMetrics metr = getFontMetrics(small);
         g.setColor(Color.red);
         g.setFont(small);
