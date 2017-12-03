@@ -18,7 +18,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private final int B_WIDTH = DOT_SIZE*35;
     private final int B_HEIGHT = DOT_SIZE*20;
     private final int ALL_DOTS = 900;
-    private final int RAND_POS = 29;
+    private final int RAND_POS_X = 35;
+    private final int RAND_POS_Y = 20;
     private int DELAY = 140;
 
 //    SNAKE ASSETS PATH
@@ -276,7 +277,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void checkCollision() {
 
-        System.out.println(x[0] + " " + y[0]);
+//        System.out.println(x[0] + " " + y[0]);
         for (int z = dots; z > 0; z--) {
 
             if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
@@ -309,12 +310,12 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private void locateApple() {
         int r;
 
-        r = (int) (Math.random() * RAND_POS);
+        r = (int) (Math.random() * RAND_POS_X);
         apple_x = ((r * DOT_SIZE));
 
-        r = (int) (Math.random() * RAND_POS);
+        r = (int) (Math.random() * RAND_POS_Y);
         apple_y = ((r * DOT_SIZE));
-
+//        System.out.println("Coord Apple: " + apple_x + ", " + apple_y);
         int prey = (int) (Math.random() * 9);
 
         if (prey == 0) {
