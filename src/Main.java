@@ -15,11 +15,17 @@ public class Main extends JFrame {
 
     public Main() {
 
+        String HEAD_DOWN = "assets/snake/down_head.png";
+
         add(new Board());
 
         setResizable(false);
         pack();
 
+        ImageIcon head_down = new ImageIcon(HEAD_DOWN);
+        Image head_down_img = head_down.getImage();
+
+        setIconImage(head_down_img);
         setTitle("Python");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
