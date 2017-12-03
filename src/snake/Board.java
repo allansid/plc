@@ -221,8 +221,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void gameOver(Graphics g) {
 
-        String msg = "Game Over";
-        Font small = new Font("f", Font.ITALIC, 20);
+        String msg = "Game Over" + '\n'+ "Score: " + score;
+        Font small = new Font("f", Font.BOLD, 20);
         FontMetrics metr = getFontMetrics(small);
         g.setColor(Color.red);
         g.setFont(small);
@@ -230,7 +230,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
     }
 
 
-    private void checkApple() {
+    private synchronized void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
@@ -243,10 +243,9 @@ public class Board extends JPanel implements ActionListener, Runnable {
             } else if (prey_img == pinguin_img) {
                 score = score + 2;
             } else {
-                score = score++;
+                score++;
             }
             dots++;
-
             locateApple();
         }
     }
