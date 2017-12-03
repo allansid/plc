@@ -17,7 +17,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private final int DOT_SIZE = 35;
     private final int B_WIDTH = DOT_SIZE*35;
     private final int B_HEIGHT = DOT_SIZE*20;
-    private final int ALL_DOTS = 900;
+    private final int ALL_DOTS = (B_HEIGHT*B_WIDTH)/(DOT_SIZE*DOT_SIZE);
     private final int RAND_POS_X = 35;
     private final int RAND_POS_Y = 20;
     private int DELAY = 140;
@@ -60,7 +60,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private int score = 0;
     private Timer timer;
     private JLabel scoreLabel = new JLabel("Score: "+score);
-//    Snake Images
+
+    //    Snake Images
     private Image tail_up_img;
     private Image tail_down_img;
     private Image tail_left_img;
