@@ -57,9 +57,15 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private boolean esc = false;
     private boolean inGame = true;
     private boolean pause = false;
-    private int score = 0;
     private Timer timer;
-    private JLabel scoreLabel = new JLabel("Score: "+score);
+
+    private long seg = 0;
+    private long time = 0;
+    private int score = 0;
+    private int fps = 0;
+    private JLabel timeLabel = new JLabel("Time:" + time);
+    private JLabel scoreLabel = new JLabel("Score: " + score);
+    private JLabel fpsLabel = new JLabel("FPS:" + fps);
 
     //    Snake Images
     private Image tail_up_img;
@@ -87,8 +93,12 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
         scoreLabel.setForeground(Color.white);
         scoreLabel.setSize(new Dimension(60,30));
+        timeLabel.setForeground(Color.red);
+        timeLabel.setSize(new Dimension(30,15));
         addKeyListener(new TAdapter());
         add(scoreLabel);
+        add(timeLabel);
+
         setBackground(Color.DARK_GRAY);
         setFocusable(true);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
@@ -166,6 +176,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
         locateApple();
 
+        seg = System.currentTimeMillis()/1000;
+
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -178,9 +190,13 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void doDrawing(Graphics g) {
 
+        time += System.currentTimeMillis()/1000 - seg;
+        seg = System.currentTimeMillis()/1000;
+
         if(esc){
             System.exit(0);
         }
+
         if (inGame) {
             g.drawImage(prey_img, apple_x, apple_y, this);
 
@@ -358,6 +374,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
     public void run() {
         while(true){
             scoreLabel.setText("Score: "+score);
+            timeLabel.setText("Time: "+time);
         }
     }
 
