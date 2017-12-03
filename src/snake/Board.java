@@ -84,7 +84,7 @@ public class Board extends JPanel implements ActionListener {
     public Board() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.ORANGE);
+        setBackground(Color.DARK_GRAY);
         setFocusable(true);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
@@ -205,11 +205,6 @@ public class Board extends JPanel implements ActionListener {
 
             Toolkit.getDefaultToolkit().sync();
 
-        } else if (esc) {
-            gameClose();
-        } else {
-
-            gameOver(g);
         }
 
         if (pause) {
@@ -217,10 +212,6 @@ public class Board extends JPanel implements ActionListener {
         } else {
             timer.start();
         }
-    }
-
-    private void gameClose() {
-
     }
 
     private void gameOver(Graphics g) {
@@ -238,25 +229,17 @@ public class Board extends JPanel implements ActionListener {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
-//            if (){
-//                apple.
-//            } else if () {
-//
-//            } else if () {
-//
-//            } else if () {
-//
-//            } else if () {
-//
-//            } else if () {
-//
-//            } else if () {
-//
-//            } else if () {
-//
-//            } else {
+            if (prey_img == cavalo_img || prey_img == girafa_img){
+                dots = dots + 6;
+            } else if (prey_img == elefante_img) {
+                dots = dots + 10;
+            } else if (prey_img == macaco_img || prey_img == panda_img) {
+                dots = dots + 3;
+            } else if (prey_img == pinguin_img) {
+                dots = dots + 2;
+            } else {
                 dots++;
-//            }
+            }
 
             locateApple();
         }
@@ -401,12 +384,10 @@ public class Board extends JPanel implements ActionListener {
 
             if (key == KeyEvent.VK_M){
                 DELAY = DELAY + 10;
-                System.out.println(DELAY);
             }
 
             if (key == KeyEvent.VK_N){
                 DELAY = DELAY - 10;
-                System.out.println(DELAY);
             }
 
         }
