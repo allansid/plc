@@ -1,5 +1,8 @@
 package snake;
-
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,21 +14,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener {
 
     private final int B_WIDTH = 900;
     private final int B_HEIGHT = 700;
-    private final int DOT_SIZE = 10;
+    private final int DOT_SIZE = 40;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
-    private final int DELAY = 120;
+    private int DELAY = 120;
+
+//    SNAKE ASSETS PATH
+    private final String HEAD_UP = "assets/snake/up_head.png";
+    private final String HEAD_DOWN = "assets/snake/down_head.png";
+    private final String HEAD_LEFT = "assets/snake/left_head.png";
+    private final String HEAD_RIGHT = "assets/snake/right_head.png";
+    private final String TAIL_UP = "assets/snake/up_tail.png";
+    private final String TAIL_DOWN = "assets/snake/down_tail.png";
+    private final String TAIL_LEFT = "assets/snake/left_tail.png";
+    private final String TAIL_RIGHT = "assets/snake/right_tail.png";
+
+//    ANIMALS ASSETS PATH
+    private final String CAVALO = "assets/animals/cavalo.png";
+    private final String COELHO = "assets/animals/coelho.png";
+    private final String ELEFANTE = "assets/animals/elefante.png";
+    private final String GIRAFA = "assets/animals/girafa.png";
+    private final String MACACO = "assets/animals/macaco.png";
+    private final String PANDA = "assets/animals/panda.png";
+    private final String PAPAGAIO = "assets/animals/papagaio.png";
+    private final String PINGUIN = "assets/animals/pinguin.png";
+    private final String PORCO = "assets/animals/porco.png";
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
@@ -39,12 +58,32 @@ public class Board extends JPanel implements ActionListener {
     private boolean rightDirection = true;
     private boolean upDirection = false;
     private boolean downDirection = false;
+    private boolean esc = false;
     private boolean inGame = true;
+    private boolean pause = false;
 
     private Timer timer;
-    private Image tail;
-    private Image apple;
-    private Image head;
+//    Snake Images
+    private Image tail_up_img;
+    private Image tail_down_img;
+    private Image tail_left_img;
+    private Image tail_right_img;
+    private Image head_up_img;
+    private Image head_down_img;
+    private Image head_left_img;
+    private Image head_right_img;
+
+//     Animals Images
+
+    private Image cavalo_img;
+    private Image coelho_img;
+    private Image elefante_img;
+    private Image girafa_img;
+    private Image macaco_img;
+    private Image panda_img;
+    private Image papagaio_img;
+    private Image pinguin_img;
+    private Image porco_img;
 
     public Board() {
 
@@ -58,28 +97,71 @@ public class Board extends JPanel implements ActionListener {
 
     private void loadImages() {
 
-        ImageIcon iid = new ImageIcon("assets/parrot.png");
-        tail = iid.getImage();
+//        Snake
+        ImageIcon head_up = new ImageIcon(HEAD_UP);
+        head_up_img = head_up.getImage();
 
-        ImageIcon iia = new ImageIcon("assets/parrot.png");
-        apple = iia.getImage();
+        ImageIcon head_down = new ImageIcon(HEAD_DOWN);
+        head_down_img = head_down.getImage();
 
-        ImageIcon iih = new ImageIcon("assets/parrot.png");
-        head = iih.getImage();
+        ImageIcon head_left = new ImageIcon(HEAD_LEFT);
+        head_left_img = head_left.getImage();
+
+        ImageIcon head_right = new ImageIcon(HEAD_RIGHT);
+        head_right_img = head_right.getImage();
+
+        ImageIcon tail_up = new ImageIcon(TAIL_UP);
+        tail_up_img = tail_up.getImage();
+
+        ImageIcon tail_down = new ImageIcon(TAIL_DOWN);
+        tail_down_img = tail_down.getImage();
+
+        ImageIcon tail_left = new ImageIcon(TAIL_LEFT);
+        tail_left_img = tail_left.getImage();
+
+        ImageIcon tail_right = new ImageIcon(TAIL_RIGHT);
+        tail_right_img = tail_right.getImage();
+
+//        Animals
+
+        ImageIcon cavalo = new ImageIcon(CAVALO);
+        cavalo_img = cavalo.getImage();
+
+        ImageIcon coelho = new ImageIcon(COELHO);
+        coelho_img = coelho.getImage();
+
+        ImageIcon elefante = new ImageIcon(ELEFANTE);
+        elefante_img = elefante.getImage();
+
+        ImageIcon girafa = new ImageIcon(GIRAFA);
+        girafa_img = girafa.getImage();
+
+        ImageIcon macaco = new ImageIcon(MACACO);
+        macaco_img = macaco.getImage();
+
+        ImageIcon panda = new ImageIcon(PANDA);
+        panda_img = panda.getImage();
+
+        ImageIcon papagaio = new ImageIcon(PAPAGAIO);
+        papagaio_img = papagaio.getImage();
+
+        ImageIcon pinguin = new ImageIcon(PINGUIN);
+        pinguin_img = pinguin.getImage();
     }
 
     private void initGame() {
 
         dots = 3;
-
+        int fator = 5;
         for (int z = 0; z < dots; z++) {
-            x[z] = 50 - z * 10;
-            y[z] = 50;
+            x[z] = 50*fator - (z * 10)*fator;
+            y[z] = 50*fator;
         }
 
         locateApple();
 
         timer = new Timer(DELAY, this);
+
         timer.start();
     }
 
@@ -96,22 +178,45 @@ public class Board extends JPanel implements ActionListener {
         }
         if (inGame) {
 
-            g.drawImage(apple, apple_x, apple_y, this);
+            g.drawImage(elefante_img, apple_x, apple_y, this);
 
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
-                    g.drawImage(head, x[z], y[z], this);
+                    if (downDirection) {
+                        g.drawImage(head_down_img, x[z], y[z], this);
+                    } else if (upDirection) {
+                        g.drawImage(head_up_img, x[z], y[z], this);
+                    } else if (leftDirection) {
+                        g.drawImage(head_left_img, x[z], y[z], this);
+                    } else if (rightDirection) {
+                        g.drawImage(head_right_img, x[z], y[z], this);
+                    }
                 } else {
-                    g.drawImage(tail, x[z], y[z], this);
+                    g.drawImage(tail_right_img, x[z], y[z], this);
+
                 }
+//                System.out.println("z: "+z);
+//                System.out.println("x: " + x[z] + "  y: "+y[z]);
             }
 
             Toolkit.getDefaultToolkit().sync();
 
+        } else if (esc) {
+            gameClose();
         } else {
 
             gameOver(g);
         }
+
+        if (pause) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+    }
+
+    private void gameClose() {
+
     }
 
     private void gameOver(Graphics g) {
@@ -140,7 +245,26 @@ public class Board extends JPanel implements ActionListener {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
-            dots++;
+//            if (){
+//                apple.
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else if () {
+//
+//            } else {
+                dots++;
+//            }
+
             locateApple();
         }
     }
@@ -250,9 +374,25 @@ public class Board extends JPanel implements ActionListener {
                 rightDirection = false;
                 leftDirection = false;
             }
-            if((key == KeyEvent.VK_ESCAPE)){
-                acabar = true;
+
+            if (key == KeyEvent.VK_ESCAPE) {
+                esc = true;
             }
+
+            if (key == KeyEvent.VK_P) {
+                pause = !pause;
+            }
+
+            if (key == KeyEvent.VK_M){
+                DELAY = DELAY + 10;
+                System.out.println(DELAY);
+            }
+
+            if (key == KeyEvent.VK_N){
+                DELAY = DELAY - 10;
+                System.out.println(DELAY);
+            }
+
         }
     }
 }
