@@ -17,7 +17,7 @@ public class Main extends JFrame {
         setResizable(false);
         pack();
 
-        setTitle("PLC - Snake That Eat Parrots");
+        setTitle("Python");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
