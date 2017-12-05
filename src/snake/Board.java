@@ -43,6 +43,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private final String PINGUIN = "assets/animals/pinguin.png";
     private final String PORCO = "assets/animals/porco.png";
 
+//    OTHERS ASSETS PATH
+    private final String APPLE = "assets/apple.png";
+    private final String BOMB = "assets/bomb.png";
+
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
 
@@ -67,7 +71,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private JLabel scoreLabel = new JLabel("Score: " + score);
     private JLabel fpsLabel = new JLabel("FPS:" + fps);
 
-    //    Snake Images
+//    Snake Images
     private Image tail_up_img;
     private Image tail_down_img;
     private Image tail_left_img;
@@ -77,7 +81,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private Image head_left_img;
     private Image head_right_img;
 
-//     Animals Images
+//    Animals Images
     private Image cavalo_img;
     private Image coelho_img;
     private Image elefante_img;
@@ -88,6 +92,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private Image pinguin_img;
     private Image porco_img;
     private Image prey_img;
+
+//    Images
+    private Image apple_img;
+    private Image bomb_img;
 
     public Board() {
 
@@ -163,6 +171,13 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
         ImageIcon porco = new ImageIcon(PORCO);
         porco_img = porco.getImage();
+
+//        Others
+
+        ImageIcon apple = new ImageIcon(APPLE);
+        apple_img = apple.getImage();
+        ImageIcon bomb = new ImageIcon(BOMB);
+        bomb_img = bomb.getImage();
     }
 
     private void initGame() {
