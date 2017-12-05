@@ -33,15 +33,15 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private final String TAIL_RIGHT = "assets/snake/right_tail.png";
 
 //    ANIMALS ASSETS PATH
-    private final String CAVALO = "assets/animals/cavalo.png";
-    private final String COELHO = "assets/animals/coelho.png";
-    private final String ELEFANTE = "assets/animals/elefante.png";
-    private final String GIRAFA = "assets/animals/girafa.png";
-    private final String MACACO = "assets/animals/macaco.png";
+    private final String HIPPO = "assets/animals/hippo.png";
+    private final String RABBIT = "assets/animals/rabbit.png";
+    private final String ELEPHANT = "assets/animals/elephant.png";
+    private final String GIRAFFE = "assets/animals/giraffe.png";
+    private final String MONKEY = "assets/animals/monkey.png";
     private final String PANDA = "assets/animals/panda.png";
-    private final String PAPAGAIO = "assets/animals/papagaio.png";
-    private final String PINGUIN = "assets/animals/pinguin.png";
-    private final String PORCO = "assets/animals/porco.png";
+    private final String PARROT = "assets/animals/parrot.png";
+    private final String PENGUIN = "assets/animals/penguin.png";
+    private final String PIG = "assets/animals/pig.png";
 
 //    OTHERS ASSETS PATH
     private final String APPLE = "assets/apple.png";
@@ -51,8 +51,12 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private final int y[] = new int[ALL_DOTS];
 
     private int dots;
+    private int animal_x;
+    private int animal_y;
     private int apple_x;
     private int apple_y;
+    private int bomb_x;
+    private int bomb_y;
 
     private boolean leftDirection = false;
     private boolean rightDirection = true;
@@ -82,15 +86,16 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private Image head_right_img;
 
 //    Animals Images
-    private Image cavalo_img;
-    private Image coelho_img;
-    private Image elefante_img;
-    private Image girafa_img;
-    private Image macaco_img;
+    private Image hippo_img;
+    private Image rabbit_img;
+    private Image elephant_img;
+    private Image giraffe_img;
+    private Image monkey_img;
     private Image panda_img;
-    private Image papagaio_img;
-    private Image pinguin_img;
-    private Image porco_img;
+    private Image parrot_img;
+    private Image penguin_img;
+    private Image pig_img;
+
     private Image prey_img;
 
 //    Images
@@ -145,32 +150,32 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
 //        Animals
 
-        ImageIcon cavalo = new ImageIcon(CAVALO);
-        cavalo_img = cavalo.getImage();
+        ImageIcon hippo = new ImageIcon(HIPPO);
+        hippo_img = hippo.getImage();
 
-        ImageIcon coelho = new ImageIcon(COELHO);
-        coelho_img = coelho.getImage();
+        ImageIcon rabbit = new ImageIcon(RABBIT);
+        rabbit_img = rabbit.getImage();
 
-        ImageIcon elefante = new ImageIcon(ELEFANTE);
-        elefante_img = elefante.getImage();
+        ImageIcon elephant = new ImageIcon(ELEPHANT);
+        elephant_img = elephant.getImage();
 
-        ImageIcon girafa = new ImageIcon(GIRAFA);
-        girafa_img = girafa.getImage();
+        ImageIcon giraffe = new ImageIcon(GIRAFFE);
+        giraffe_img = giraffe.getImage();
 
-        ImageIcon macaco = new ImageIcon(MACACO);
-        macaco_img = macaco.getImage();
+        ImageIcon monkey = new ImageIcon(MONKEY);
+        monkey_img = monkey.getImage();
 
         ImageIcon panda = new ImageIcon(PANDA);
         panda_img = panda.getImage();
 
-        ImageIcon papagaio = new ImageIcon(PAPAGAIO);
-        papagaio_img = papagaio.getImage();
+        ImageIcon parrot = new ImageIcon(PARROT);
+        parrot_img = parrot.getImage();
 
-        ImageIcon pinguin = new ImageIcon(PINGUIN);
-        pinguin_img = pinguin.getImage();
+        ImageIcon penguin = new ImageIcon(PENGUIN);
+        penguin_img = penguin.getImage();
 
-        ImageIcon porco = new ImageIcon(PORCO);
-        porco_img = porco.getImage();
+        ImageIcon pig = new ImageIcon(PIG);
+        pig_img = pig.getImage();
 
 //        Others
 
@@ -213,7 +218,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
         }
 
         if (inGame) {
-            g.drawImage(prey_img, apple_x, apple_y, this);
+            g.drawImage(prey_img, animal_x, animal_y, this);
 
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
@@ -267,15 +272,15 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private synchronized void checkApple() {
 
-        if ((x[0] == apple_x) && (y[0] == apple_y)) {
+        if ((x[0] == animal_x) && (y[0] == animal_y)) {
 
-            if (prey_img == cavalo_img || prey_img == girafa_img){
+            if (prey_img == hippo_img || prey_img == giraffe_img){
                 score = score + 6;
-            } else if (prey_img == elefante_img) {
+            } else if (prey_img == elephant_img) {
                 score = score + 10;
-            } else if (prey_img == macaco_img || prey_img == panda_img) {
+            } else if (prey_img == monkey_img || prey_img == panda_img) {
                 score = score + 3;
-            } else if (prey_img == pinguin_img) {
+            } else if (prey_img == penguin_img) {
                 score = score + 2;
             } else {
                 score++;
@@ -345,31 +350,31 @@ public class Board extends JPanel implements ActionListener, Runnable {
         int r;
 
         r = (int) (Math.random() * RAND_POS_X);
-        apple_x = ((r * DOT_SIZE));
+        animal_x = ((r * DOT_SIZE));
 
         r = (int) (Math.random() * RAND_POS_Y);
-        apple_y = ((r * DOT_SIZE));
-//        System.out.println("Coord Apple: " + apple_x + ", " + apple_y);
+        animal_y = ((r * DOT_SIZE));
+//        System.out.println("Coord Apple: " + animal_x + ", " + animal_y);
         int prey = (int) (Math.random() * 9);
 
         if (prey == 0) {
-          prey_img = elefante_img;
+          prey_img = elephant_img;
         } else if (prey == 1) {
-            prey_img = cavalo_img;
+            prey_img = hippo_img;
         } else if (prey == 2) {
-            prey_img = coelho_img;
+            prey_img = rabbit_img;
         } else if (prey == 3) {
-            prey_img = girafa_img;
+            prey_img = giraffe_img;
         } else if (prey == 4) {
-            prey_img = macaco_img;
+            prey_img = monkey_img;
         } else if (prey == 5) {
             prey_img = panda_img;
         } else if (prey == 6) {
-            prey_img = papagaio_img;
+            prey_img = parrot_img;
         } else if (prey == 7) {
-            prey_img = pinguin_img;
+            prey_img = penguin_img;
         } else if (prey == 8) {
-            prey_img = porco_img;
+            prey_img = pig_img;
         }
     }
 
