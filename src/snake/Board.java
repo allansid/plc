@@ -49,8 +49,11 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
+//    private final int x2[] = new int[ALL_DOTS];
+//    private final int y2[] = new int[ALL_DOTS];
 
     private int dots;
+//    private int dots2;
     private int animal_x;
     private int animal_y;
     private int apple_x;
@@ -62,6 +65,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private boolean rightDirection = true;
     private boolean upDirection = false;
     private boolean downDirection = false;
+//    private boolean aDirection = false;
+//    private boolean dDirection = true;
+//    private boolean wDirection = false;
+//    private boolean sDirection = false;
     private boolean esc = false;
     private boolean inGame = true;
     private boolean pause = false;
@@ -187,12 +194,11 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
     private void initGame() {
 
-        dots = 3;
+        initPlayer1();
 
-        for (int z = 0; z < dots; z++) {
-            x[z] = DOT_SIZE - (z * 10);
-            y[z] = DOT_SIZE;
-        }
+//        if (false) {
+//            initPlayer2();
+//        }
 
         locateApple();
 
@@ -201,6 +207,24 @@ public class Board extends JPanel implements ActionListener, Runnable {
         timer = new Timer(DELAY, this);
         timer.start();
     }
+
+    private void initPlayer1() {
+        dots = 3;
+
+        for (int z = 0; z < dots; z++) {
+            x[z] = DOT_SIZE - (z * 10);
+            y[z] = DOT_SIZE;
+        }
+    }
+
+//    private void initPlayer2() {
+//        dots2 = 3;
+//
+//        for (int z = 0; z < dots2; z++) {
+//            x2[z] = DOT_SIZE - (z * 10);
+//            y2[z] = DOT_SIZE;
+//        }
+//    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -245,6 +269,33 @@ public class Board extends JPanel implements ActionListener, Runnable {
 //                System.out.println("z: "+z);
 //                System.out.println("x: " + x[z] + "  y: "+y[z]);
             }
+//            if (false) {
+//                for (int z = 0; z < dots2; z++) {
+//                    if (z == 0) {
+//                        if (sDirection) {
+//                            g.drawImage(head_down_img, x2[z], y2[z], this);
+//                        } else if (wDirection) {
+//                            g.drawImage(head_up_img, x2[z], y2[z], this);
+//                        } else if (aDirection) {
+//                            g.drawImage(head_left_img, x2[z], y2[z], this);
+//                        } else if (dDirection) {
+//                            g.drawImage(head_right_img, x2[z], y2[z], this);
+//                        }
+//                    } else {
+//                        if (sDirection) {
+//                            g.drawImage(tail_down_img, x2[z], y2[z], this);
+//                        } else if (wDirection) {
+//                            g.drawImage(tail_up_img, x2[z], y2[z], this);
+//                        } else if (aDirection) {
+//                            g.drawImage(tail_left_img, x2[z], y2[z], this);
+//                        } else if (dDirection) {
+//                            g.drawImage(tail_right_img, x2[z], y2[z], this);
+//                        }
+//                    }
+//                    //                System.out.println("z: "+z);
+//                    //                System.out.println("x: " + x[z] + "  y: "+y[z]);
+//                }
+//            }
 
             Toolkit.getDefaultToolkit().sync();
 
@@ -286,6 +337,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
                 score++;
             }
             dots++;
+//            dots2++;
             locateApple();
         }
     }
@@ -296,7 +348,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
             x[z] = x[(z - 1)];
             y[z] = y[(z - 1)];
         }
-
+//        for (int z = dots2; z > 0; z--) {
+//            x2[z] = x2[(z - 1)];
+//            y2[z] = y2[(z - 1)];
+//        }
         if (leftDirection) {
             x[0] -= DOT_SIZE;
         }
@@ -312,6 +367,22 @@ public class Board extends JPanel implements ActionListener, Runnable {
         if (downDirection) {
             y[0] += DOT_SIZE;
         }
+
+//        if (aDirection) {
+//            x2[0] -= DOT_SIZE;
+//        }
+//
+//        if (dDirection) {
+//            x2[0] += DOT_SIZE;
+//        }
+//
+//        if (wDirection) {
+//            y2[0] -= DOT_SIZE;
+//        }
+//
+//        if (sDirection) {
+//            y2[0] += DOT_SIZE;
+//        }
     }
 
     private void checkCollision() {
@@ -337,7 +408,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
         }
 
         if (x[0] < 0) {
-            System.out.println("Entrei" + x[0]);
+//            System.out.println("Entrei" + x[0]);
             inGame = false;
         }
 
@@ -428,6 +499,31 @@ public class Board extends JPanel implements ActionListener, Runnable {
                 rightDirection = false;
                 leftDirection = false;
             }
+
+
+//            if ((key == KeyEvent.VK_A) && (!dDirection)) {
+//                aDirection = true;
+//                wDirection = false;
+//                dDirection = false;
+//            }
+//
+//            if ((key == KeyEvent.VK_F) && (!aDirection)) {
+//                dDirection = true;
+//                wDirection = false;
+//                sDirection = false;
+//            }
+//
+//            if ((key == KeyEvent.VK_W) && (!sDirection)) {
+//                wDirection = true;
+//                dDirection = false;
+//                aDirection = false;
+//            }
+//
+//            if ((key == KeyEvent.VK_S) && (!wDirection)) {
+//                sDirection = true;
+//                dDirection = false;
+//                aDirection = false;
+//            }
 
             if (key == KeyEvent.VK_ESCAPE) {
                 esc = true;
