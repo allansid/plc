@@ -266,8 +266,6 @@ public class Board extends JPanel implements ActionListener, Runnable {
                         g.drawImage(tail_right_img, x[z], y[z], this);
                     }
                 }
-//                System.out.println("z: "+z);
-//                System.out.println("x: " + x[z] + "  y: "+y[z]);
             }
 //            if (false) {
 //                for (int z = 0; z < dots2; z++) {
