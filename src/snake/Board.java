@@ -252,10 +252,30 @@ public class Board extends JPanel implements ActionListener, Runnable {
         doDrawing(g);
     }
 
+    private void drawHorizontalWall(Graphics g, int x, int y, int size){
+        g.drawImage(wall_center_img, x+size, y, this);
+        g.drawImage(wall_right_img, x+(2*size), y, this);
+        g.drawImage(wall_center_img, x+(3*size), y, this);
+        g.drawImage(wall_right_img, x+(4*size), y, this);
+    }
+
+//    private void drawVerticalWall(Graphics g, int x, int y, int size){
+//        g.drawImage(wall_center_img, x, y, this);
+//        g.drawImage(wall_right_img, x, y+(2*size), this);
+//        g.drawImage(wall_center_img, x, y+(3*size), this);
+//        g.drawImage(wall_right_img, x, y+(4*size), this);
+//    }
+//
+
     private void doDrawing(Graphics g) {
 
         time += System.currentTimeMillis()/1000 - seg;
         seg = System.currentTimeMillis()/1000;
+
+        drawHorizontalWall(g, 100, 100, 45 );
+        drawHorizontalWall(g, 500, 500, 45 );
+        drawHorizontalWall(g, 1000, 300, 45 );
+//        drawVerticalWall(g, 300, 300, 45 );
 
         if(esc){
             System.exit(0);
