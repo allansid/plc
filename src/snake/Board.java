@@ -47,8 +47,15 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private final String APPLE = "assets/apple.png";
     private final String BOMB = "assets/bomb.png";
 
+    private final String WALL_CENTER = "assets/muro_centro.png";
+    private final String WALL_LEFT = "assets/muro_esq.png";
+    private final String WALL_RIGHT = "assets/muro_dir.png";
+
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
+    private final int xWall[] = new int[5*DOT_SIZE];
+    private final int yWall[] = new int[5*DOT_SIZE];
+
 //    private final int x2[] = new int[ALL_DOTS];
 //    private final int y2[] = new int[ALL_DOTS];
 
@@ -104,6 +111,11 @@ public class Board extends JPanel implements ActionListener, Runnable {
     private Image pig_img;
 
     private Image prey_img;
+
+//    Wall Images
+    private Image wall_left_img;
+    private Image wall_right_img;
+    private Image wall_center_img;
 
 //    Images
     private Image apple_img;
@@ -190,6 +202,14 @@ public class Board extends JPanel implements ActionListener, Runnable {
         apple_img = apple.getImage();
         ImageIcon bomb = new ImageIcon(BOMB);
         bomb_img = bomb.getImage();
+
+
+        ImageIcon wall_center = new ImageIcon(WALL_CENTER);
+        wall_center_img = wall_center.getImage();
+        ImageIcon wall_left = new ImageIcon(WALL_LEFT);
+        wall_left_img = wall_left.getImage();
+        ImageIcon wall_right = new ImageIcon(WALL_RIGHT);
+        wall_right_img = wall_right.getImage();
     }
 
     private void initGame() {
@@ -267,7 +287,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
                     }
                 }
             }
-//            if (false) {
+
+            //            if (false) {
 //                for (int z = 0; z < dots2; z++) {
 //                    if (z == 0) {
 //                        if (sDirection) {
