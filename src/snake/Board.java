@@ -222,7 +222,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
         while (true) {
             locateApple();
-            if (!((animal_x >= 385 && animal_x <= 885) && ((animal_y >= 200 && animal_y <= 240)|| (animal_y >= 400 && animal_y <= 440)))) {
+            if (!((animal_x >= 285 && animal_x <= 1285) && ((animal_y >= 140 && animal_y <= 300)|| (animal_y >= 380 && animal_y <= 460)))) {
                 break;
             } 
         }
@@ -241,7 +241,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
         }
     }
 
-    private void restart() {
+    private void mudarFase() {
         dots = 3;
         leftDirection = false;
         rightDirection = true;
@@ -253,8 +253,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
             y[z] = DOT_SIZE;
         }
         locateApple();
-        score = 0;
-        time = 0;
+
     }
 
 
@@ -282,20 +281,29 @@ public class Board extends JPanel implements ActionListener, Runnable {
             index++;
         }
     }
+    private boolean wallBlock = false;
+    private boolean drawWall = false;
 
     private void doDrawing(Graphics g) {
 
         time += System.currentTimeMillis()/1000 - seg;
         seg = System.currentTimeMillis()/1000;
 
-        drawHorizontalWall(g, 340, 200, 45 ,10);
-        drawHorizontalWall(g, 340, 400, 45 ,10);
 
         if(esc){
             System.exit(0);
         }
 
+        if (drawWall) {
+            drawHorizontalWall(g, 340, 200, 45 ,10);
+            drawHorizontalWall(g, 340, 400, 45 ,10);
+            if ((x[0] >= 345 && x[0] <= 830) && ((y[0] >= 150 && y[0] <= 230) || (y[0] >= 385 && y[0] <= 430))){
+                wallBlock = true;
+            }
+        }
+
         if (inGame) {
+
             g.drawImage(prey_img, animal_x, animal_y, this);
             g.drawImage(bomb_img, bomb_x, bomb_y, this);
 
@@ -374,7 +382,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
     }
 
-
+    private boolean ifs = true;
     private synchronized void checkApple() {
 
         if ((x[0] == animal_x) && (y[0] == animal_y)) {
@@ -392,10 +400,17 @@ public class Board extends JPanel implements ActionListener, Runnable {
             }
             dots++;
 //            dots2++;
+
+            if (score >= 20 && ifs) {
+                mudarFase();
+                drawWall = true;
+                ifs = false;
+            }
+
             locateApple();
         } else if ((x[0] == bomb_x) && (y[0] == bomb_y)) {
             inGame = !inGame;
-        } else if ((x[0] >= 345 && x[0] <= 830) && ((y[0] >= 150 && y[0] <= 230) || (y[0] >= 385 && y[0] <= 430))) {
+        } else if (wallBlock) {
             inGame = !inGame;
         }
     }
@@ -605,9 +620,9 @@ public class Board extends JPanel implements ActionListener, Runnable {
                 DELAY = DELAY - 10;
             }
 
-            if (key == KeyEvent.VK_R){
-                restart();
-            }
+//            if (key == KeyEvent.VK_R){
+//                restart();
+//            }
 
         }
     }
