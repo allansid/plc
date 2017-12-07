@@ -588,6 +588,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
                 DELAY = DELAY - 10;
             }
 
+            if (key == KeyEvent.VK_R){
+                initPlayer1();
+            }
+
         }
     }
 }
