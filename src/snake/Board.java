@@ -283,6 +283,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
         if (inGame) {
             g.drawImage(prey_img, animal_x, animal_y, this);
+            g.drawImage(bomb_img, bomb_x, bomb_y, this);
 
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
@@ -378,6 +379,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
             dots++;
 //            dots2++;
             locateApple();
+        } else if ((x[0] == bomb_x) && (y[0] == bomb_y)) {
+            inGame = !inGame;
         }
     }
 
@@ -464,6 +467,12 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
         r = (int) (Math.random() * RAND_POS_Y);
         animal_y = ((r * DOT_SIZE));
+
+        r = (int) (Math.random() * RAND_POS_X);
+        bomb_x = ((r * DOT_SIZE));
+
+        r = (int) (Math.random() * RAND_POS_Y);
+        bomb_y = ((r * DOT_SIZE));
 //        System.out.println("Coord Apple: " + animal_x + ", " + animal_y);
         int prey = (int) (Math.random() * 9);
 
