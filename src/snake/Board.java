@@ -252,6 +252,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
             x[z] = DOT_SIZE - (z * 10);
             y[z] = DOT_SIZE;
         }
+        locateApple();
         score = 0;
         time = 0;
     }
