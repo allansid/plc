@@ -378,7 +378,7 @@ public class Board extends JPanel implements ActionListener, Runnable {
             locateApple();
         } else if ((x[0] == bomb_x) && (y[0] == bomb_y)) {
             inGame = !inGame;
-        } else if ((x[0] >= 385 && x[0] <= 835) && ((y[0] >= 210 && y[0] <= 240) || (y[0] >= 410 && y[0] <= 440))) {
+        } else if ((x[0] >= 345 && x[0] <= 830) && ((y[0] >= 150 && y[0] <= 230) || (y[0] >= 385 && y[0] <= 430))) {
             inGame = !inGame;
         }
     }
