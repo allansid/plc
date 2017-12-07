@@ -220,8 +220,12 @@ public class Board extends JPanel implements ActionListener, Runnable {
 //            initPlayer2();
 //        }
 
-        locateApple();
-
+        while (true) {
+            locateApple();
+            if (!((animal_x >= 385 && animal_x <= 885) && ((animal_y >= 200 && animal_y <= 240)|| (animal_y >= 400 && animal_y <= 440)))) {
+                break;
+            } 
+        }
         seg = System.currentTimeMillis()/1000;
 
         timer = new Timer(DELAY, this);
@@ -267,9 +271,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
         time += System.currentTimeMillis()/1000 - seg;
         seg = System.currentTimeMillis()/1000;
 
-        drawHorizontalWall(g, 100, 100, 45 , 4);
-        drawHorizontalWall(g, 500, 500, 45 , 2);
-        drawHorizontalWall(g, 800, 300, 45 ,6);
+        drawHorizontalWall(g, 340, 200, 45 ,10);
+        drawHorizontalWall(g, 340, 400, 45 ,10);
 
         if(esc){
             System.exit(0);
@@ -374,6 +377,8 @@ public class Board extends JPanel implements ActionListener, Runnable {
 //            dots2++;
             locateApple();
         } else if ((x[0] == bomb_x) && (y[0] == bomb_y)) {
+            inGame = !inGame;
+        } else if ((x[0] >= 385 && x[0] <= 835) && ((y[0] >= 210 && y[0] <= 240) || (y[0] >= 410 && y[0] <= 440))) {
             inGame = !inGame;
         }
     }
