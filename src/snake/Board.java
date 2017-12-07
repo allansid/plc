@@ -241,6 +241,22 @@ public class Board extends JPanel implements ActionListener, Runnable {
         }
     }
 
+    private void restart() {
+        dots = 3;
+        leftDirection = false;
+        rightDirection = true;
+        upDirection = false;
+        downDirection = false;
+
+        for (int z = 0; z < dots; z++) {
+            x[z] = DOT_SIZE - (z * 10);
+            y[z] = DOT_SIZE;
+        }
+        score = 0;
+        time = 0;
+    }
+
+
 //    private void initPlayer2() {
 //        dots2 = 3;
 //
@@ -586,6 +602,10 @@ public class Board extends JPanel implements ActionListener, Runnable {
 
             if (key == KeyEvent.VK_N){
                 DELAY = DELAY - 10;
+            }
+
+            if (key == KeyEvent.VK_R){
+                restart();
             }
 
         }
